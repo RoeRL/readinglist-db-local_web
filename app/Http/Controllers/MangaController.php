@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMangaRequest;
 use App\Models\Manga;
 use Illuminate\Http\Request;
 
@@ -26,6 +27,21 @@ class MangaController extends Controller
 
         return view('manga.index', compact('mangas', 'status', 'statuses', 'counts'));
     }
+    public function create()
+    {
+        $statuses = Manga::$statuses;
+        return view('manga.create', compact('statuses'));
+    }
+    public function store(StoreMangaRequest $request)
+    {
+        $data = $request->validated();
+        $data['genres']  = $request->genres  ?? [];
+        $data['sources'] = $request->sources ?? [];
+        unset($data['genres_raw']);
 
+        Manga::create($data);
 
+        return redirect()->route('manga.index')
+            ->with('success', 'Entry added.');
+    }
 }
