@@ -6,7 +6,7 @@
 
 {{-- ── Page Header ── --}}
 <div class="mb-6">
-    <h1 class="font-display text-3xl italic text-paper">Archive</h1>
+    <h1 class="font-display text-3xl italic text-paper">Library</h1>
     <p class="text-ink-200 text-sm mt-1 font-mono">
         {{ $mangas->count() }} {{ $status === 'all' ? 'total entries' : Manga::$statuses[$status] ?? $status }}
     </p>
